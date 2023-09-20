@@ -4,11 +4,12 @@
 # This deploys a k8s nodes.
 # This uses the parameter `ci_custom` to pass a custom cloud init configuration file.
 
-resource "telmate_proxmox_vm_qemu" "k8s_node" {
+resource "proxmox_vm_qemu" "k8s_node" {
   name             = "k8s-node-${var.proxmox_node_config.role}-${var.proxmox_node_config.name}"
   target_node      = var.proxmox_node_config.target_node # Specify the Proxmox cluster node
   vmid             = 0  # VM ID are assigned automatically.
   desc             = var.proxmox_node_config.description
+  provider         = proxmox
 #   define_connection_info
 #   bios             = "seabios"
   onboot           = true  # Turn on when the node is on.
