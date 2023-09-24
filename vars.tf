@@ -1,6 +1,6 @@
 variable "proxmox_node_config" {
   description = "A map of Proxmox node configurations for a k8s node."
-  type        = map(object({
+  type        = object({
     role          = string
     name          = string
     target_node   = string
@@ -14,5 +14,5 @@ variable "proxmox_node_config" {
     resource_pool = string
     network_name  = string
     storage_pool  = string
-  }))
+  })
 }

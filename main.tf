@@ -16,7 +16,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
   oncreate         = true  # Turn on when deployed.
   tablet           = false  # Turn on tablet device (needed for mouse)
   agent            = 1  # Turn on the qemu agent (TODO: do not forget to enable the daemon)
-  iso              = "Name of iso"  # iso image to use (when clone not set)
+  # iso              = "Name of iso"  # iso image to use (when clone not set)
   clone            = var.proxmox_node_config.vm_template  # VM Template to use
   full_clone       = true  # Turn off for linked clones (TODO: Research viability)
   hastate          = "started"  # On and ready to go.
