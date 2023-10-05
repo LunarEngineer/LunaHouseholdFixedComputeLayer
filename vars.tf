@@ -14,7 +14,10 @@ variable "proxmox_node_config" {
     network_name         = string
     storage_pool         = string
     k3s_version          = string
+    ip_addr              = string
+    ip_gw                = string
     ssh_username         = string
-    ssh_authorized_key   = string
+    ssh_public_key       = string
+    ssh_private_key      = string
   })
 }

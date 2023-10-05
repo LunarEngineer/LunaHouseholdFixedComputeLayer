@@ -17,8 +17,8 @@ users:
     groups: users, adm, docker, sudo
     lock_passwd: true
     shell: /bin/bash
-    ssh_authorized_keys:
-      - ${ssh_authorized_key}
+    ssh_public_keys:
+      - ${ssh_public_key}
 
 # expand the root partition up to a certain location on the disk
 # note that the value is the marker on the disk where the root partion will end
