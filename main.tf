@@ -87,6 +87,9 @@ EOF
       "sudo apt-get install qemu-guest-agent",
       "sudo systemctl start qemu-guest-agent",
       "sudo systemctl enable qemu-guest-agent",
+      # count.index == 0
+      # ? "echo 'Running setup script on ${self.triggers.node_name}' && ./setup_script.sh"
+      # : "echo 'Running cluster join command on ${self.triggers.node_name}' && ./join_cluster.sh ${null_resource.k8s_nodes[0].triggers.node_ip}"
     ]
   }
 }
