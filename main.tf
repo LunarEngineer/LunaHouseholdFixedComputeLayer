@@ -3,26 +3,6 @@
 #######################
 # This deploys a k8s node.
 
-# resource "local_sensitive_file" "ssh_private_key" {
-#   # content  = module.secrets_engine.pm_ssh_private_key
-#   content = <<EOF
-# -----BEGIN OPENSSH PRIVATE KEY-----
-# b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-# QyNTUxOQAAACAgrvtc4M5SDgMO+JRIdeDO0ag56oES9yspfkKrBH4MIwAAAKB2+l+hdvpf
-# oQAAAAtzc2gtZWQyNTUxOQAAACAgrvtc4M5SDgMO+JRIdeDO0ag56oES9yspfkKrBH4MIw
-# AAAECFSfnPSaF2wLIYnOquXVffnty/cD7bhcI3VnmFExOrYiCu+1zgzlIOAw74lEh14M7R
-# qDnqgRL3Kyl+QqsEfgwjAAAAGnRlcnJhZm9ybS1wcm92QHB2ZSFteXRva2VuAQID
-# -----END OPENSSH PRIVATE KEY-----
-# EOF
-#   filename = "${path.module}/k8s-node-${var.proxmox_node_config.role}-${var.proxmox_node_config.target_node}"
-# }
-
-
-# data "local_file" "keyfile" {
-#   filename = "${path.module}/k8s-node-${var.proxmox_node_config.role}-${var.proxmox_node_config.target_node}"
-#   depends_on = [ local_sensitive_file.ssh_private_key ]
-# }
-
 resource "proxmox_vm_qemu" "k8s_node" {
   # depends_on = [local_sensitive_file.ssh_private_key]
   name             = "k8s-node-${var.proxmox_node_config.role}-${var.proxmox_node_config.target_node}"
@@ -89,26 +69,17 @@ EOF
 ${var.proxmox_node_config.ssh_public_key}
 EOF
   ipconfig0          = "ip=dhcp"
-  # ipconfig0        = "ip=${var.proxmox_node_config.ip_addr}/16,gw=${var.proxmox_node_config.ip_gw}"
   
 
   ##################
   # Instance Setup #
   ##################
   provisioner "remote-exec" {
-    # connection {
-    #   type             = "ssh"
-    #   user             = var.proxmox_node_config.ssh_username
-    #   host             = var.proxmox_node_config.ip_addr
-    #   private_key      = local_sensitive_file.ssh_private_key.content
-    # }
     connection {
       type        = "ssh"
       user        = self.ssh_user
-      # password    = "test"
       private_key = self.ssh_private_key
       host        = self.default_ipv4_address
-      # port        = self.ssh_port
     }
 
     inline = [
