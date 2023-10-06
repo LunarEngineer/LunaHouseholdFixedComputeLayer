@@ -51,20 +51,10 @@ EOF
   ############################
   os_type          = "cloud-init"  # centos, cloud-init
   clone            = var.proxmox_node_config.vm_template  # VM Template to use
-  full_clone       = false  # Turn off for linked clones (TODO: Research viability)
-  ciuser           = var.proxmox_node_config.ssh_username
-  cipassword       = "test"
+  full_clone       = false  # Full clones take much more time and are unnecessary.
+  ciuser           = var.proxmox_node_config.ssh_username  #
   ssh_user         = var.proxmox_node_config.ssh_username
-  # ssh_private_key  = var.proxmox_node_config.ssh_private_key
-  ssh_private_key  = <<EOF
------BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-QyNTUxOQAAACAgrvtc4M5SDgMO+JRIdeDO0ag56oES9yspfkKrBH4MIwAAAKB2+l+hdvpf
-oQAAAAtzc2gtZWQyNTUxOQAAACAgrvtc4M5SDgMO+JRIdeDO0ag56oES9yspfkKrBH4MIw
-AAAECFSfnPSaF2wLIYnOquXVffnty/cD7bhcI3VnmFExOrYiCu+1zgzlIOAw74lEh14M7R
-qDnqgRL3Kyl+QqsEfgwjAAAAGnRlcnJhZm9ybS1wcm92QHB2ZSFteXRva2VuAQID
------END OPENSSH PRIVATE KEY-----
-EOF
+  ssh_private_key  = var.proxmox_node_config.ssh_private_key
   sshkeys          = <<EOF
 ${var.proxmox_node_config.ssh_public_key}
 EOF
