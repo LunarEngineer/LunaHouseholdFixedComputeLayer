@@ -1,0 +1,9 @@
+#!/bin/bash
+# SCP a file from a remote host.
+echo "${ssh_private_key}" > ${keyname}
+chmod 600 ${keyname}
+scp -i ${keyname} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${ssh_user}@${ip}:/tmp/k8s-join k8s-join
+# rm ${keyname}
+
+# Master node IP
+# 1. SSH into the master and add to the /etc/hosts file

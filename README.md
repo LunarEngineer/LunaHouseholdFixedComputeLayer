@@ -12,3 +12,4 @@ Contents:
 * Variable("proxmox_node_config"): This describes the input data structure to the resource.
 
 Roadmap: Parameterization by start / join cluster and control / worker.
+Roadmap: Get cloud-init yaml up and running.

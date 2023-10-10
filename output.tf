@@ -1,5 +1,5 @@
-output "ip" {
-  description = "SSH Key for the server"
-  sensitive   = true
-  value       = resource.proxmox_vm_qemu.k8s_node.default_ipv4_address
+
+output "cluster_join" {
+  value = data.local_file.cluster-join.content
+  sensitive = true
 }
