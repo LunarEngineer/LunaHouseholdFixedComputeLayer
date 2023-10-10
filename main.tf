@@ -60,7 +60,7 @@ EOF
   ciuser           = var.ssh_username  #
   ssh_user         = var.ssh_username
   ssh_private_key  = var.ssh_private_key
-  cipassword       = "test"
+  cipassword       = "test"  # TODO: Remove when things are fully functional.
   sshkeys          = <<EOF
 ${var.ssh_public_key}
 EOF
@@ -86,61 +86,61 @@ EOF
       # "sudo systemctl enable qemu-guest-agent",
     ]
   }
-
-  provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = self.ssh_user
-      private_key = self.ssh_private_key
-      host        = self.default_ipv4_address
-    }
-    inline = [
-      # Wait for snap availability
-      "sudo snap wait system seed.loaded",
-      # Install k8s
-      "sudo snap install microk8s --classic",
-      "sudo usermod -a -G microk8s terraform-prov",
-      "sudo chown -R terraform-prov ~/",
-      "echo \"exit\" | newgrp microk8s",
-      "echo microk8s installed",
-    ]
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = self.ssh_user
-      private_key = self.ssh_private_key
-      host        = self.default_ipv4_address
-    }
-    inline = [
-      "echo providing user with microk8s group",
-      "sudo usermod -a -G microk8s terraform-prov",
-      "sudo chown -R terraform-prov ~/",
-      "echo \"exit\" | newgrp microk8s",
-      # Export the k8s join and k8s config
-      "echo \"$(microk8s add-node | grep microk8s | head -n 1) --skip-verify\" > /tmp/k8s-join",
-      "echo done",
-    ]
-  }
-  provisioner "local-exec" {
-    command = templatefile(
-      "${path.module}/get_join_str.sh.tftpl",
-      {
-        ssh_private_key=var.ssh_private_key,
-        keyname = "k8s-join-master-key",
-        ssh_user = var.ssh_username,
-        ip = self.default_ipv4_address
-      }
-    )
-  }
 }
 
+# Extracted from k8s_master
+# provisioner "remote-exec" {
+#     connection {
+#       type        = "ssh"
+#       user        = self.ssh_user
+#       private_key = self.ssh_private_key
+#       host        = self.default_ipv4_address
+#     }
+#     inline = [
+#       # Wait for snap availability
+#       "sudo snap wait system seed.loaded",
+#       # Install k8s
+#       "sudo snap install microk8s --classic",
+#       "sudo usermod -a -G microk8s terraform-prov",
+#       "sudo chown -R terraform-prov ~/",
+#       "echo \"exit\" | newgrp microk8s",
+#       "echo microk8s installed",
+#     ]
+#   }
 
-data "local_file" "cluster-join" {
-  depends_on = [ proxmox_vm_qemu.k8s_master ]
-  filename = "k8s-join"
-}
+#   provisioner "remote-exec" {
+#     connection {
+#       type        = "ssh"
+#       user        = self.ssh_user
+#       private_key = self.ssh_private_key
+#       host        = self.default_ipv4_address
+#     }
+#     inline = [
+#       "echo providing user with microk8s group",
+#       "sudo usermod -a -G microk8s terraform-prov",
+#       "sudo chown -R terraform-prov ~/",
+#       "echo \"exit\" | newgrp microk8s",
+#       # Export the k8s join and k8s config
+#       "echo \"$(microk8s add-node | grep microk8s | head -n 1) --skip-verify\" > /tmp/k8s-join",
+#       "echo done",
+#     ]
+#   }
+#   provisioner "local-exec" {
+#     command = templatefile(
+#       "${path.module}/get_join_str.sh.tftpl",
+#       {
+#         ssh_private_key=var.ssh_private_key,
+#         keyname = "k8s-join-master-key",
+#         ssh_user = var.ssh_username,
+#         ip = self.default_ipv4_address
+#       }
+#     )
+#   }
+
+# data "local_file" "cluster-join" {
+#   depends_on = [ proxmox_vm_qemu.k8s_master ]
+#   filename = "k8s-join"
+# }
 
 #################
 # Control Nodes #
@@ -198,7 +198,7 @@ EOF
   ciuser           = var.ssh_username  #
   ssh_user         = var.ssh_username
   ssh_private_key  = var.ssh_private_key
-  cipassword       = "test"
+  cipassword       = "test"  # TODO: Remove when complete
   sshkeys          = <<EOF
 ${var.ssh_public_key}
 EOF
@@ -224,45 +224,46 @@ EOF
       # "sudo systemctl enable qemu-guest-agent",
     ]
   }
-
-  provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = self.ssh_user
-      private_key = self.ssh_private_key
-      host        = self.default_ipv4_address
-    }
-    inline = [
-      # Wait for snap availability
-      "sudo snap wait system seed.loaded",
-      # Install k8s
-      "sudo snap install microk8s --classic",
-      "sudo usermod -a -G microk8s terraform-prov",
-      "sudo chown -R terraform-prov ~/",
-      "echo \"exit\" | newgrp microk8s",
-      "echo microk8s installed",
-    ]
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = self.ssh_user
-      private_key = self.ssh_private_key
-      host        = self.default_ipv4_address
-    }
-    inline = [
-      "echo providing user with microk8s group",
-      "sudo usermod -a -G microk8s terraform-prov",
-      "sudo chown -R terraform-prov ~/",
-      # Join the cluster
-      "${data.local_file.cluster-join.content}",
-      "echo done",
-    ]
-  }
 }
 
+# Extracted from control node
+# provisioner "remote-exec" {
+#   connection {
+#     type        = "ssh"
+#     user        = self.ssh_user
+#     private_key = self.ssh_private_key
+#     host        = self.default_ipv4_address
+#   }
+#   inline = [
+#     # Wait for snap availability
+#     "sudo snap wait system seed.loaded",
+#     # Install k8s
+#     "sudo snap install microk8s --classic",
+#     "sudo usermod -a -G microk8s terraform-prov",
+#     "sudo chown -R terraform-prov ~/",
+#     "echo \"exit\" | newgrp microk8s",
+#     "echo microk8s installed",
+#   ]
+# }
 
+# provisioner "remote-exec" {
+#   connection {
+#     type        = "ssh"
+#     user        = self.ssh_user
+#     private_key = self.ssh_private_key
+#     host        = self.default_ipv4_address
+#   }
+#   inline = [
+#     "echo providing user with microk8s group",
+#     "sudo usermod -a -G microk8s terraform-prov",
+#     "sudo chown -R terraform-prov ~/",
+#     # Join the cluster
+#     "${data.local_file.cluster-join.content}",
+#     "echo done",
+#   ]
+# }
+
+# Useful testing commands
 # export MASTER_NODE_IP="192.168.50.12"
 # export CONTROL_NODE_IP="192.168.50.111"
 # Connection failed. The hostname (k8s-node-control-gaianode01) of the joining node does not resolve to the IP "192.168.50.125". Refusing join (400)
