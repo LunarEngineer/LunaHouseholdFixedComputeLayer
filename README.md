@@ -2,9 +2,11 @@
 
 This is the lowest layer of the LunaHousehold Server.
 
-This deploys a k8s network into a series of proxmox nodes.
+This deploys a series of proxmox nodes into an expected output structure.
 
-Just declare your proxmox nodes when you call the module.
+On the far side of this there will be output.
+
+
 
 i.e.
 
