@@ -4,9 +4,7 @@ This is the lowest layer of the LunaHousehold Server.
 
 This deploys a series of proxmox nodes into an expected output structure.
 
-On the far side of this there will be output.
-
-
+On the far side of this is a set of managed vms in a few groups.
 
 i.e.
 
@@ -53,7 +51,3 @@ module "fixed_compute_layer_control_master" {
 ```
 
 This uses the environment variables `PM_API_URL`, `PM_API_TOKEN_SECRET`, and `PM_API_TOKEN_ID` (or other appropriate credentials) to define connectivity for the provider.
-
-
-Roadmap: Parameterization by start / join cluster and control / worker.
-Roadmap: Get cloud-init yaml up and running or ansible. Looks like ansible takes care of both.
