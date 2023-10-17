@@ -2,13 +2,14 @@
 # Fixed Compute Layer #
 #######################
 # This deploys the backbone for a k8s network.
+# TODO: Take the pattern below and abstract it.
 
 ###############
 # Master Node #
 ###############
 resource "proxmox_vm_qemu" "k8s_master" {
   lifecycle {
-    prevent_destroy = true
+    ignore_changes = [ qemu_os, pool, disk ]
   }
   for_each = { for name in var.k8s_nodes.k8s_nodes_master : name => name }
   target_node      = each.value
@@ -95,7 +96,7 @@ EOF
 # This deploys a series of control nodes.
 resource "proxmox_vm_qemu" "k8s_control" {
   lifecycle {
-    prevent_destroy = true
+    ignore_changes = [ qemu_os, pool, disk ]
   }
   depends_on = [ resource.proxmox_vm_qemu.k8s_master ]
   for_each = { for name in var.k8s_nodes.k8s_nodes_control : name => name }
@@ -182,7 +183,7 @@ EOF
 # The resource a series of worker nodes.
 resource "proxmox_vm_qemu" "k8s_worker" {
   lifecycle {
-    prevent_destroy = true
+    ignore_changes = [ qemu_os, pool, disk ]
   }
   depends_on = [ resource.proxmox_vm_qemu.k8s_control ]
   for_each = { for name in var.k8s_nodes.k8s_nodes_worker : name => name }
