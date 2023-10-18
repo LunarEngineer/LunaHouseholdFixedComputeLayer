@@ -13,7 +13,7 @@ There are four files here:
   * k8s_nodes: A three {str: list[str]} mappings which declare the set(s) of master, control, and worker VMs to create by denoting their **target** *proxmox node*. (See example below)
   * ssh_*: Three variables containing various SSH credential information.
   * *_plane_node_args: Two mappings with mildly different default values for the QEmu VMs.
-* [`versions.tf``](versions.tf): Simply declaring the required Telmate provider.
+* [`versions.tf`](versions.tf): Simply declaring the required Telmate provider.
 * [`main.tf`](main.tf): This deploys three sets of QEmu VMs into the proxmox cluster (master, control, worker).
 * [`output.tf`](output.tf): This contains *three* key-value 'VM Name' to 'VM IP' output data structures identifying the contact information for the deployed VMs.
 
