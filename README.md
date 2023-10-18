@@ -4,9 +4,22 @@ This is the lowest layer of the LunaHousehold Server.
 
 This deploys a series of proxmox nodes into an expected output structure.
 
+## Contents
+
+This uses the environment variables `PM_API_URL`, `PM_API_TOKEN_SECRET`, and `PM_API_TOKEN_ID` (or other appropriate credentials) to define connectivity for the provider.
+
+There are four files here:
+* [`vars.tf`](vars.tf)`: This contains the following data structures:
+  * k8s_nodes: A three {str: list[str]} mappings which declare the set(s) of master, control, and worker VMs to create by denoting their **target** *proxmox node*. (See example below)
+  * ssh_*: Three variables containing various SSH credential information.
+  * *_plane_node_args: Two mappings with mildly different default values for the QEmu VMs.
+* [`versions.tf``](versions.tf): Simply declaring the required Telmate provider.
+* [`main.tf`](main.tf): This deploys three sets of QEmu VMs into the proxmox cluster (master, control, worker).
+* [`output.tf`](output.tf): This contains *three* key-value 'VM Name' to 'VM IP' output data structures identifying the contact information for the deployed VMs.
+
 On the far side of this is a set of managed vms in a few groups.
 
-i.e.
+## Example
 
 TODO: CODE FOLD HERE
 
@@ -50,4 +63,3 @@ module "fixed_compute_layer_control_master" {
 }
 ```
 
-This uses the environment variables `PM_API_URL`, `PM_API_TOKEN_SECRET`, and `PM_API_TOKEN_ID` (or other appropriate credentials) to define connectivity for the provider.
