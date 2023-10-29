@@ -1,6 +1,14 @@
 # LunaHouseholdFixedComputeLayer
 
-This is the lowest layer of the LunaHousehold Server.
+## Updates
+
+I am adapting this to the new provider.
+
+1. Swap provider
+2. List provider new resources.
+3. Write down extractable patterns which can be reusable.
+
+## Old stuff
 
 This deploys a series of proxmox nodes into an expected output structure.
 
