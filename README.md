@@ -4,6 +4,8 @@ This is the lowest layer of the LunaHousehold Server.
 
 This deploys a series of proxmox nodes into an expected output structure.
 
+known issues: Flaky-ass provider; resolution - cancel apply, murder and delete failues, reapply. 5 min apply on average. ideal final solution - provider swap **or** automate around failures and ensure recording time metrics for comparison
+
 ## Contents
 
 This uses the environment variables `PM_API_URL`, `PM_API_TOKEN_SECRET`, and `PM_API_TOKEN_ID` (or other appropriate credentials) to define connectivity for the provider.
