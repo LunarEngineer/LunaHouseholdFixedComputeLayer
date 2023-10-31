@@ -7,6 +7,24 @@
 # There is a concurrent role deployed into the cluster of 'fixed compute maintainer' or similar.
 # Finally, there is a self-signed certificate deployed. 'I am who I say I am, trust me.'
 # At some point it will be worthwhile to investigate a high volume external certificate authority.
+
+#########
+# Roles #
+#########
+
+# module "role_definitions" {
+#     source              = "./role_definitions"
+#     providers           = {
+#         proxmox = proxmox
+#     }
+# }
+
+# module "role_deployment" {
+#     source              = "./role"
+#     providers           = {
+#         proxmox = proxmox
+#     }
+# }
 #######################
 # Fixed Compute Layer #
 #######################

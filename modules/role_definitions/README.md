@@ -1,3 +1,10 @@
-# Move all this shit up into LunaHousehold
+# Role Definitions
 
-Make the data structure which deploys LunaHousehold.
+These define the standard roles deployed into the cluster.
+
+* Bootstrap: A temporary role used to get the cluster up and running.
+* Cluster and Node Maintenance Roles: Roles to keep the cluster up and running.
+* Monitoring Role: Big Brother is Always Watching.
+* User Role: Users. You gotta have em!
+
+These variables are re
