@@ -1,7 +1,7 @@
 # Explicitly declare the privileges associated with the monitoring role.
 
 variable "cluster_monitoring_privileges" {
-    type = list(str)
+    type = list(string)
     default = [
         # "Mapping.Audit",  # Need to be able to view resources.
         # "Pool.Audit",  # Need to view pools.

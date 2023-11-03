@@ -1,5 +1,16 @@
 # LunaHouseholdFixedComputeLayer
 
+Or 'Cloud-in-a-Can'.
+
+This deploys users, groups, and roles.
+
+Then, this builds some preset 'flavors' for secure VMs:
+* k8s node (Because I need a k8s cluster) for my funtimes.
+* Gaming VM (Because I still enjoy having fun, and my laptop isn't a smooth experience)
+
+The goal is to have it as automated as possible, with as few HITL interactions as possible.
+
+
 ## Updates
 
 I am adapting this to the new provider.

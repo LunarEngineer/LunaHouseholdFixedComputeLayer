@@ -10,6 +10,18 @@
 #         ["192.168.17.0/23", "LunarEngineeringTest"]
 #     ]
 # }
+# proxmox_virtual_environment_firewall_ipset
+# proxmox_virtual_environment_certificate
+# tls_private_key
+# tls_self_signed_cert
+# proxmox_virtual_environment_dns
+# proxmox_virtual_environment_hosts
+# proxmox_virtual_environment_network_linux_bridge
+# proxmox_virtual_environment_network_linux_vlan
+# proxmox_virtual_environment_firewall_options
+# proxmox_virtual_environment_firewall_rules
+# proxmox_virtual_environment_firewall_alias
+# virtual_environment_pool
 
 # resource "proxmox_virtual_environment_firewall_ipset" "ipset" {
 # # * node_name - (Optional) Node name. Leave empty for cluster level aliases.

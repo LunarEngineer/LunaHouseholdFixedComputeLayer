@@ -30,9 +30,16 @@ variable "groups" {
     description = "This is a list of groups, each with a `description` and a `name`"
 }
 
+locals {
+    _provision_group = [{
+        "name": "fixed-compute-provisioner",
+        "description": "Used to provision the fixed compute layer."
+    }]
+}
+
 # Create groups; looping over inputs
 resource "proxmox_virtual_environment_group" "fixed_compute_groups" {
-    for_each = {for index, _mapping in var.groups : index => _mapping}
+    for_each = {for index, _mapping in concat(var.groups, local._provision_group) : _mapping["name"] => _mapping}
     comment  = each.value["description"]
     group_id = each.value["name"]
 }
@@ -56,10 +63,28 @@ variable "users" {
     }))
 }
 
+locals {
+    _provision_user = [{
+        "username": "fixed-compute-provisioner@pve",
+        "domains": [],
+        "comment": "Provisioner",
+        "email": "nomail@nomail.com",
+        "enabled": true,
+        "expiration": null,  # TODO: Expire
+        "firstname": "provisioner",
+        "lastname": "provisioner",
+        "groups": ["fixed-compute-provisioner"],
+        "keys": "",
+        "ssh_public_key": "",
+        "ssh_private_key": "",
+        "acl": "",
+    }]
+}
+
 # Create users; looping over inputs
 resource "proxmox_virtual_environment_user" "fixed_compute_users" {
     depends_on      = [ resource.proxmox_virtual_environment_group.fixed_compute_groups ]
-    for_each        = {for index, _mapping in var.users : index => _mapping}
+    for_each        = {for index, _mapping in concat(var.users, local._provision_user) : _mapping["username"] => _mapping}
     comment         = each.value["comment"]
     email           = each.value["email"]
     enabled         = each.value["enabled"]

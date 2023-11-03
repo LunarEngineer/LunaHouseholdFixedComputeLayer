@@ -7,4 +7,4 @@ These define the standard roles deployed into the cluster.
 * Monitoring Role: Big Brother is Always Watching.
 * User Role: Users. You gotta have em!
 
-These variables are re
+These variables are reused above.
