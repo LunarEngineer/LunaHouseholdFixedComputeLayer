@@ -45,20 +45,20 @@
 #     file_name = "example.cloud-config.yaml"
 #   }
 # }
-variable "machine_name" {
-  description = "A *unique* name for the vm"
-}
+# variable "machine_name" {
+#   description = "A *unique* name for the vm"
+# }
 
-variable "machine_type" {
-  description     = "A pre-set template name"
-  type            = string
-  validation {
-    condition     = contains(output.lookatmenodes["available_machine_types"], var.machine_type)
-    error_message = "The value of var.example must be in ${output.lookatmenodes["available_machine_types"]}."
-  }
-}
-var "machine_definition" {
-  type = list(object(
-    machine_name
-  ))
-}
+# variable "machine_type" {
+#   description     = "A pre-set template name"
+#   type            = string
+#   validation {
+#     condition     = contains(output.lookatmenodes["available_machine_types"], var.machine_type)
+#     error_message = "The value of var.example must be in ${output.lookatmenodes["available_machine_types"]}."
+#   }
+# }
+# var "machine_definition" {
+#   type = list(object(
+#     machine_name
+#   ))
+# }

@@ -8,5 +8,5 @@ module "fixed_compute_layer_modules" {
   # Inputs for the roles
   roles               = var.roles
   # Inputs for the machines
-  machines_to_create  = var.machines
+  # machines_to_create  = var.machines
 }
