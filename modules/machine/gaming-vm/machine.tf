@@ -9,15 +9,15 @@
 #     }
 # }
 
-resource "proxmox_virtual_environment_file" "vm_iso" {
-  #  A VZ template is a tar.gz archive, which is “installed” into the private area of a container.
-  #  It contains the necessary file system structure with all the files required to boot the system,
-  #  set up networking, and start a set of services.
-  content_type = "vztmpl"
-  datastore_id = vars.datastore
-  node_name    = vars.node
+# resource "proxmox_virtual_environment_file" "vm_iso" {
+#   #  A VZ template is a tar.gz archive, which is “installed” into the private area of a container.
+#   #  It contains the necessary file system structure with all the files required to boot the system,
+#   #  set up networking, and start a set of services.
+#   content_type = "vztmpl"
+#   datastore_id = vars.datastore
+#   node_name    = vars.node
 
-  source_file {
-    path = "https://download.proxmox.com/images/system/debian-12-standard_12.2-1_amd64.tar.zst"
-  }
-}
+#   source_file {
+#     path = "https://download.proxmox.com/images/system/debian-12-standard_12.2-1_amd64.tar.zst"
+#   }
+# }

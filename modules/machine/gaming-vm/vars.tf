@@ -1,6 +1,6 @@
-variable "default_inputs" {
-    default = {
-        "datastore": "gaia-ceph-fs",
-        "node": 2,
-    }
-}
+# variable "default_inputs" {
+#     default = {
+#         "datastore": "gaia-ceph-fs",
+#         "node": 2,
+#     }
+# }

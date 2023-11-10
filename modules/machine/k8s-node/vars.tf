@@ -1,6 +1,6 @@
-variable "default_inputs" {
-    default = {
-        "a": 1,
-        "b": 2,
-    }
-}
+# variable "default_inputs" {
+#     default = {
+#         "a": 1,
+#         "b": 2,
+#     }
+# }
